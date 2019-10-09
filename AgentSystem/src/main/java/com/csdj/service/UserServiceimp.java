@@ -54,6 +54,11 @@ public class UserServiceimp implements  UserService{
         return userMapper.typeid(id);
     }
 
+    @Override
+    public User getUserInfoByNAP(String userCode) {
+        return userMapper.getUserInfoByNAP(userCode);
+    }
+
 
     @Override
     public List<User> show_All_User() {

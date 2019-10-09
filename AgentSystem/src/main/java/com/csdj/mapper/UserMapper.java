@@ -2,6 +2,7 @@ package com.csdj.mapper;
 import com.csdj.entity.SystemConfig;
 import com.csdj.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 public interface UserMapper {
@@ -17,6 +18,10 @@ public interface UserMapper {
 
 		/*查询所有*/
 		List<SystemConfig> typeid(@Param("id") int id);
+
+		@Select("select * from as_user where userCode = #{username}")
+		User getUserInfoByNAP(@Param("username") String username);
+
 
 	/**
 	 * 查询全部用户信息

@@ -159,14 +159,14 @@
         table.on('tool(userTable)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                window.location = "${pageContext.request.contextPath}/keyword/checkInfoById.json/" + data.id
+                window.location = "${pageContext.request.contextPath}/keyword/checkInfoById.html/" + data.id
             } else if(obj.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     obj.del();
                     layer.close(index);
                 });
             } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                window.location = "${pageContext.request.contextPath}/keyword/upInfoById.html/" + data.id
             }
         });
 

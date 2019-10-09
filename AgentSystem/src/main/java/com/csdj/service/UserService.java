@@ -22,6 +22,8 @@ public interface UserService{
     /*查询所有*/
     public  List<SystemConfig> typeid(@Param("id") int id);
 
+    User getUserInfoByNAP(String userCode);
+
     /**
      * 显示全部用户信息
      * @return 用户信息

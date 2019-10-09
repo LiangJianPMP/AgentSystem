@@ -1,7 +1,8 @@
 package com.csdj.service.keywords;
 
-import com.csdj.entity.Keywords;
+import com.csdj.entity.*;
 
+import java.security.Key;
 import java.util.List;
 
 /**
@@ -15,6 +16,17 @@ public interface KeywordsService {
      */
     List<Keywords> show_All_Keywords(int page,int limit,String keywords);
 
+    boolean updKeywordsInfo(Keywords keywords);
+
+    String getProvinces(String provinces);
+    List<Contact> getContactes(Integer customId);
+    String getAreas(String area);
+    String getCities(String city);
+    Custom getCustom(Integer id);
+    List<Keywords> getAllKeywordsList(Integer page,Integer limit);
+
+    Keywords getKeywordInfoById(Integer id);
+    List<Keywords> getListByName(Integer page,Integer limit,String keywords,String customName);
     /**
      * 显示关键词数量
      * @return 数量
