@@ -1,0 +1,41 @@
+package com.csdj.mapper;
+
+import com.csdj.entity.Contact;
+
+import java.util.List;
+
+
+
+/**
+ * 客户联系人
+ */
+public interface ContactMapper {
+	/**
+	 * getContactList
+	 * @param contact
+	 * @return
+	 */
+	public List<Contact> getContactList(Contact contact) throws Exception;
+		
+	/**
+	 * addContact
+	 * @param contact
+	 * @return
+	 */
+	public int addContact(Contact contact) throws Exception;
+	
+	/**
+	 * modifyContact
+	 * @param contact
+	 * @return
+	 */
+	public int modifyContact(Contact contact) throws Exception;
+	
+	/**
+	 * deleteContact
+	 * @param contact
+	 * @return
+	 */
+	public int deleteContact(Contact contact) throws Exception;
+
+}

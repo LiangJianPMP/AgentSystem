@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.premission.PremissionMapper">
+
+    <insert id="getInsert_Premission" parameterType="Premission">
+        insert into as_role_premission(roleId,functionId,creationTime,createdBy,isStart)
+        values(#{roleId},#{functionId},#{creationTime},#{createdBy},#{isStart})
+    </insert>
+
+    <select id="getSelect_Id" resultType="int">
+        SELECT id from as_role_premission where roleId=#{roleId} and functionId=#{functionId}
+    </select>
+
+    <delete id="getDelete_Premission">
+        delete from as_role_premission
+        where id=#{id}
+    </delete>
+
+</mapper>

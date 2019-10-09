@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.account.AccountMapper">
+
+    <insert id="getInsert_Account" parameterType="AccountDetail">
+        insert into as_accountdetail
+        values(#{id},#{userId},#{detailType},#{detailTypeName},#{accountMoney},#{accountMoney},#{memo},#{detailDateTime})
+    </insert>
+
+    <select id="getSelect_All_AccountDetail" resultType="AccountDetail">
+        select a.id,detailTypeName,money,accountMoney,memo,detailDateTime
+        from as_accountdetail as a,as_user as u
+        <where>
+            and u.id=#{userId}
+            <if test="detailType!=null and detailType!=''">and detailType=#{detailType}</if>
+            <if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''">and detailDateTime>=#{startTime} and #{endTime}>=detailDateTime</if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+
+    <select id="getSelect_AccountDetail_Count" resultType="int">
+        select count(a.id) from as_accountdetail as a,as_user as u where u.id=#{userId}
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.FunctionMapper">
+
+	<update id="appadd" parameterType="SystemConfig">
+	update as_systemconfig set configValue=#{configValue} where configTypeName ='APP系统地址'
+	</update>
+
+
+	<update id="nianupdate" parameterType="SystemConfig">
+	update as_systemconfig set configValue=#{configValue} where configTypeName ='服务年限'
+	</update>
+
+
+	<select id="getSelect_All_Function" resultType="Function">
+        select id,functionName,creationTime,funcUrl,isStart
+        from as_function
+    </select>
+</mapper>

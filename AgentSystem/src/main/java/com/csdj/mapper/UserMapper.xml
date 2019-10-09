@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.UserMapper">
+
+
+<!--查询所有数据-->
+	<select id="select" resultType="SystemConfig">
+		select *  from as_systemconfig  where configType=1
+	</select>
+<!--添加类型-->
+	<insert id="typeadd"  parameterType="SystemConfig">
+		insert as_systemconfig(configType,configTypeName,configTypeValue,configValue,isStart) value (#{configType},#{configTypeName},#{configTypeValue},#{configValue},#{isStart})
+	</insert>
+
+<!--	删除类型-->
+	<delete id="typedel">
+		delete from as_systemconfig  where id=#{id}
+
+	</delete>
+
+<!--修改类型-->
+	<update id="typeupd" parameterType="SystemConfig">
+		update  as_systemconfig set configTypeName=#{configTypeName},isStart=#{isStart} WHERE id=#{id}
+
+
+	</update>
+
+<!--	根据id查询他的类型-->
+	<select id="typeid" resultType="SystemConfig">
+		select * from as_systemconfig where id=#{id}
+
+	</select>
+
+	<select id="getSelect_All_User" resultType="User">
+        select id,userCode from as_user
+    </select>
+
+	<select id="getSelect_All_Users_roleNames" resultType="User">
+		select u.*,r.roleName from as_user as u,as_role as r
+		<where>
+			and u.roleId=r.id
+			<if test="userCode!=null and userCode!=''">and userCode=#{userCode}</if>
+			<if test="roleId!=null and roleId!=''">and roleId=#{roleId}</if>
+			<if test="isStart!=null and isStart!=''">and u.isStart=#{isStart}</if>
+		</where>
+		limit #{page},#{limit}
+	</select>
+
+	<select id="getSelect_User_Count" resultType="int">
+        select count(u.id) from as_user as u,as_role as r where u.roleId=r.id
+    </select>
+
+	<delete id="getDelete_User">
+        delete from as_user where id=#{id}
+    </delete>
+
+	<insert id="getInsert_User" parameterType="User">
+        insert into as_user(userCode,userName,userPassword,roleId,isStart,createdBy,creationTime)
+        values(#{userCode},#{userName},#{userPassword},#{roleId},#{isStart},#{createdBy},#{creationTime})
+    </insert>
+
+	<update id="getUpdate_User" parameterType="User">
+		update as_user
+		<set>
+			<if test="userCode!=null and userCode!=''">userCode=#{userCode},</if>
+			<if test="userName!=null and userName!=''">userName=#{userName},</if>
+			<if test="userPassword!=null and userPassword!=''">userPassword=#{userPassword},</if>
+			<if test="isStart!=null and isStart!=''">isStart=#{isStart},</if>
+			<if test="roleId!=null and roleId!=''">roleId=#{roleId},</if>
+			lastUpdateTime=#{lastUpdateTime}
+		</set>
+		where id=#{id}
+	</update>
+</mapper>

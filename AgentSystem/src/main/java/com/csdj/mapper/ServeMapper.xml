@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.ServeMapper">
+
+	<select id="showfuwu" resultType="SystemConfig">
+		select *  from as_systemconfig where configType=2
+	</select>
+
+	<select id="selectid" resultType="SystemConfig">
+		select  * from as_systemconfig where id=#{id}
+</select>
+
+	<update id="fuwuupdate" parameterType="SystemConfig">
+		UPDATE  as_systemconfig set configTypeName=#{configTypeName},configValue=#{configValue},isStart=#{isStart} where id=#{id}
+	</update>
+
+
+	<insert id="fuwuadd" parameterType="SystemConfig">
+		insert  as_systemconfig(configType,configTypeName,configValue,isStart)  value (#{configType},#{configTypeName},#{configValue},#{isStart})
+
+	</insert>
+
+	<select id="showkehu" resultType="SystemConfig">
+		select *  from as_systemconfig where configType=5
+	</select>
+
+	<select id="kehuid" resultType="SystemConfig">
+		select  * from as_systemconfig where id=#{id}
+	</select>
+
+	<update id="kehuupdate" parameterType="SystemConfig">
+		UPDATE  as_systemconfig set configTypeName=#{configTypeName},isStart=#{isStart} where id=#{id}
+	</update>
+
+
+	<insert id="kehuadd" parameterType="SystemConfig">
+		insert  as_systemconfig(configType,configTypeName,isStart)  value (#{configType},#{configTypeName},#{isStart})
+
+	</insert>
+
+	<delete id="kehudel">
+		delete  from as_systemconfig where id=#{id}
+
+	</delete>
+
+
+
+
+
+
+
+
+
+
+
+
+	<select id="sfzshow" resultType="SystemConfig">
+		select *  from as_systemconfig where configType=6
+	</select>
+
+	<select id="sfzid" resultType="SystemConfig">
+		select  * from as_systemconfig where id=#{id}
+	</select>
+
+	<update id="sfzupdate" parameterType="SystemConfig">
+		UPDATE  as_systemconfig set configTypeName=#{configTypeName},isStart=#{isStart} where id=#{id}
+	</update>
+
+
+	<insert id="sfzadd" parameterType="SystemConfig">
+		insert  as_systemconfig(configType,configTypeName,isStart)  value (#{configType},#{configTypeName},#{isStart})
+
+	</insert>
+
+	<delete id="sfzdel">
+		delete  from as_systemconfig where id=#{id}
+
+	</delete>
+
+
+
+
+	<select id="youhuishow" resultType="SystemConfig">
+		select *  from as_systemconfig where configType=7
+	</select>
+
+	<select id="youhuiid" resultType="SystemConfig">
+		select  * from as_systemconfig where id=#{id}
+	</select>
+
+	<update id="youhuiupdate" parameterType="SystemConfig">
+		UPDATE  as_systemconfig set configTypeName=#{configTypeName},configTypeValue=#{configTypeValue},configValue=#{configValue},isStart=#{isStart} where id=#{id}
+	</update>
+
+
+	<insert id="youhuiadd" parameterType="SystemConfig">
+		insert  as_systemconfig(configType,configTypeName,configTypeValue,configValue,isStart)  value (#{configType},#{configTypeName},#{configTypeValue},#{configValue},#{isStart})
+
+	</insert>
+
+	<delete id="youhuidel">
+		delete  from as_systemconfig where id=#{id}
+
+	</delete>
+
+
+
+
+
+</mapper>

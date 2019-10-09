@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.csdj.mapper.UsersMapper">
+
+    <resultMap id="userAccount" type="User">
+        <id property="id" column="id"/>
+        <association property="account" javaType="Account"/>
+    </resultMap>
+
+    <resultMap id="userAccountDetail" type="User">
+        <id property="id" column="id"/>
+        <association property="accountDetail" javaType="AccountDetail"/>
+    </resultMap>
+
+
+    <select id="getAgentBalance" resultMap="userAccount">
+        select u.id,userName,money
+        FROM as_user as u,as_account as a
+        where u.id = a.userId
+    </select>
+
+    <select id="getPayment" resultMap="userAccountDetail">
+        SELECT a.id,userName,money,accountMoney,memo,detailDateTime
+        FROM as_accountdetail as a,as_user as u
+        WHERE a.userId = u.id
+    </select>
+
+    <select id="totalsummoney" resultType="Systemconfig">
+        SELECT id,configTypeName,configTypeValue,configValue FROM as_systemconfig
+    </select>
+
+
+</mapper>

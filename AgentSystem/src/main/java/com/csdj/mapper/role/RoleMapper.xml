@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.csdj.mapper.role.RoleMapper">
+
+    <select id="getSelect_All_Role" resultType="Role">
+        select * from as_role limit #{page},#{limit}
+    </select>
+
+    <select id="getSelect_Role_Count" resultType="int">
+        select count(id) from as_role
+    </select>
+
+    <delete id="getDelect_Role">
+        delete from as_role where id=#{id}
+    </delete>
+
+    <update id="getUpdate_Role" parameterType="Role">
+        update as_role
+        <set>
+            <if test="roleName!=null and roleName!=''">roleName=#{roleName},</if>
+            <if test="isStart!=null and isStart!=''">isStart=#{isStart},</if>
+            lastUpdateTime=#{lastUpdateTime}
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="getInsert_Role" parameterType="Role">
+        insert into as_role(roleName,creationTime,createdBy,isStart)
+        values(#{roleName},#{creationTime},#{createdBy},#{isStart})
+    </insert>
+
+    <select id="getSelect_All_RoleName" resultType="Role">
+        select id,roleName from as_role
+    </select>
+
+</mapper>
