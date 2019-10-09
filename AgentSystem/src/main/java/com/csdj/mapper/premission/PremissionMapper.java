@@ -32,4 +32,11 @@ public interface PremissionMapper {
      */
     boolean getDelete_Premission(@Param("id") Integer id);
 
+    /**
+     * 查询角色是否启用功能
+     * @param roleId 角色
+     * @return 角色启动的功能id
+     */
+    List<Integer> getSelect_FunctionId(@Param("roleId")int roleId);
+
 }

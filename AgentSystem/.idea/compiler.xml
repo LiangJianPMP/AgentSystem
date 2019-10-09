@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="reportForms" />
         <module name="AgentSystem-AgentSystem" />
+        <module name="AgentSystem" />
       </profile>
     </annotationProcessing>
   </component>

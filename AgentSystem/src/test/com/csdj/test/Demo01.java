@@ -1,6 +1,6 @@
 package com.csdj.test;
 
-import com.csdj.service.user.UserService;
+import com.csdj.service.UserService;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;

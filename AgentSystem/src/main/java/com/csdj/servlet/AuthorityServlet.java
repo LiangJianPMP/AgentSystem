@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,6 +54,12 @@ public class AuthorityServlet {
             premissionService.add_Premission(premission);
         }
         return "redirect:/authority.html";
+    }
+
+    @RequestMapping(value = "/showFunctionId.json",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Integer> showFunction(@RequestParam int roleId){
+        return premissionService.show_FunctionId(roleId);
     }
 
 }

@@ -19,4 +19,8 @@
         where id=#{id}
     </delete>
 
+    <select id="getSelect_FunctionId" resultType="int">
+        SELECT p.functionId FROM as_function as f,as_role_premission as p WHERE  f.id = p.functionId and p.roleId=#{roleId}
+    </select>
+
 </mapper>

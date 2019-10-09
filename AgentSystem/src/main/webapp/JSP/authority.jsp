@@ -73,15 +73,17 @@
 			</div>
 			<div class="layui-row" style="background-color: #ffffff;">
 				<div style="padding: 10px;">
-					<div class="layui-tab layui-tab-brief" lay-filter='docDemoTabBrief'>
+					<div class="layui-tab layui-tab-card" lay-filter='docDemoTabBrief'>
 						<ul class="layui-tab-title">
 							<c:forEach var="role" items="${roles}" varStatus="status">
-								<li class="role_li <c:if test='${status.count==1}'>layui-this</c:if>" value="${role.id}" >${role.roleName}</li>
+								<li class="role_li" value="${role.id}" >${role.roleName}</li>
+<%--								<c:if test='${status.count==1}'>layui-this</c:if>--%>
 							</c:forEach>
 						</ul>
 						<div class="layui-tab-content">
 							<h1 align="center" style="border-bottom: #0C0C0C 1px solid">功能列表</h1>
-							<div class="layui-tab-item layui-show">
+							<div id="show-text"><h2 align="center">请先选择角色</h2></div>
+							<div class="layui-tab-item layui-show layui-hide" id="table-hide">
 								<table id="demo" lay-filter="test"></table>
                             </div>
 						</div>
@@ -104,6 +106,7 @@
 						<label class="layui-form-label">是否启用：</label>
 						<div class="layui-input-inline">
 							<select name="isStart" id="isStart" lay-verify="required">
+								<option value=" ">-请选择-</option>
 								<option value="1">启用</option>
 								<option value="0">未启用</option>
 							</select>
@@ -119,9 +122,8 @@
 			</div>
 		</div>
 
-
 		<script type="text/html" id="barDemo">
-			<a class="layui-btn layui-btn-xs" lay-event="edit">设置角色功能权限</a>
+			<a class="layui-btn layui-btn-xs" id="gotoPage" lay-event="edit">设置角色功能权限</a>
 		</script>
 		
 		<script src="${pageContext.request.contextPath}/RESOURCES/layui/layui.js"></script>
@@ -150,11 +152,14 @@
 									return "未启用";
 								}
 							}},
+						{title: '角色是否使用权限',align: 'center',style:'color: red;',unresize: true},
 						{title: '设置权限',align: 'center',unresize: true,toolbar: '#barDemo'}
 					]]//设置表头
 				});
 				
 				$('.role_li').click(function () {
+					$('#table-hide').removeClass('layui-hide');
+					$('#show-text').hide();
 					roleId = this.value;
 				})
 
@@ -169,6 +174,39 @@
 						$('#description').text('【'+roleId+'】的功能权限设置');
 						$('#operation_function').show();
 					}
+				});
+
+				//获取角色的启动的权限
+				$('.role_li').click(function () {
+					var roleId = this.value;
+					$.ajax({
+						url : '${pageContext.request.contextPath}/showFunctionId.json',
+						type : 'get',
+						data : 'roleId='+roleId,
+						dataType : 'json',
+						success : function (result) {
+							var str=new String(result);
+							var arr=new Array();
+							arr=str.split(',');
+							$('.laytable-cell-1-0-1').each(function () {
+								if ($(this).text()!=''){
+									for (var i = 0; i < arr.length; i++){
+										if ($(this).text()!=0){
+											if ($(this).text()==arr[i]){
+												$(this).parent().next().next().next().next().next().children().text('启用');
+												break;
+											}else{
+												$(this).parent().next().next().next().next().next().children().text('未启用');
+											}
+										}
+									}
+								}
+							});
+						},
+						error : function () {
+							alert('有异常');
+						}
+					});
 				});
 
 				$('#close').click(function () {

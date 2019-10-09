@@ -27,7 +27,13 @@ public class PremissionServiceImpl implements PremissionService {
     }
 
     @Override
+    public List<Integer> show_FunctionId(int roleId) {
+        return premissionMapper.getSelect_FunctionId(roleId);
+    }
+
+    @Override
     public boolean del_Premission(Integer id) {
         return premissionMapper.getDelete_Premission(id);
     }
+
 }

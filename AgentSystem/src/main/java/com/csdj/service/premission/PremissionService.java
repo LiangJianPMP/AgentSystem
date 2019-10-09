@@ -31,4 +31,11 @@ public interface PremissionService {
      */
     boolean del_Premission(Integer id);
 
+    /**
+     * 显示角色是否启用功能
+     * @param roleId 角色
+     * @return 角色启动的功能id
+     */
+    List<Integer> show_FunctionId(int roleId);
+
 }
